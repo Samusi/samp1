@@ -63,16 +63,17 @@
             dropdownFilter: false,
             template: '<span>' +
             '<span class="NameShort">{{NameShort}}</span>',
+
             source: {
-                data: $.getJSON('1.json').done(function (data) {
-                    product = data.product;
-                    var result = data.product;
-                    return (result);
-                })
+                product:{
+                    data: $.getJSON('1.php').done( function (data) {      
+                                
+                                var result = data.product;
+                                return result;
+                            })
+                  }
+                }, 
 
-
-            },
-       
             callback: {
                     onNavigateAfter: function (node, query, event) {
                         var i = node;
