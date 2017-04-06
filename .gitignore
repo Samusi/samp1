@@ -1,0 +1,101 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title></title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="jquery.typeahead.min.css">
+
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <!--script src="../dist/jquery.typeahead.min.js"></script-->
+    <script src="jquery.typeahead.js"></script>
+
+</head>
+<body>
+
+<div style="width: 100%; max-width: 800px; margin: 0 auto;">
+
+    <h1>Пример поиска(допустим, введи К)</h1>
+
+
+<form >
+    <div class="typeahead__container">
+        <div class="typeahead__field">
+ 
+            <span class="typeahead__query">
+                <input class="js-typeahead" name="query" type="search" autofocus autocomplete="off">
+            </span>
+             <span class="typeahead__button">
+                <button type="submit">
+                    <i class="typeahead__search-icon"></i>
+                </button>
+            </span>
+ 
+        </div>
+    </div>
+</form>
+
+    <script>
+
+        $.typeahead({
+            input: ".js-typeahead",
+            minLength: 1,
+            maxItem: 8,
+            maxItemPerGroup: 12,
+            order: "asc",
+            hint: true,
+            //cache: true,
+            searchOnFocus: true,
+            group: {
+                key: "category",
+                template: function (item) {
+
+                    return item.category;
+                }
+            },
+
+            emptyTemplate: 'no result for {{query}}',
+            correlativeTemplate: true,
+            dropdownFilter: false,
+            template: '<span>' +
+            '<span class="NameShort">{{NameShort}}</span>',
+            source: {
+                data: $.getJSON('1.php').done(function (data) {
+                    product = data.product;
+                    var result = data.product;
+                    return (result);
+                })
+
+
+            },
+       
+            callback: {
+                    onNavigateAfter: function (node, query, event) {
+                        var i = node;
+
+                    },
+
+                    onClickAfter: function (node, a, item, event) {
+                        event.preventDefault;
+                        // href key gets added inside item from options.href configuration
+                        href = "product.html?" + (item.id);
+                        window.open(href);
+
+                    }
+
+                },
+
+                debug: true
+
+        });
+
+    </script>
+
+</div>
+
+</body>
+</html>
