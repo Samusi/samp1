@@ -19,7 +19,7 @@
 
 <div style="width: 100%; max-width: 800px; margin: 0 auto;">
 
-    <h1>Пример поиска(допустим, введи К)</h1>
+    <h1>Sample1</h1>
 
 
 <form >
@@ -51,10 +51,10 @@
             //cache: true,
             searchOnFocus: true,
             group: {
-                key: "category",
+                key: "conference",
                 template: function (item) {
 
-                    return item.category;
+                    return item.conference;
                 }
             },
 
@@ -62,20 +62,23 @@
             correlativeTemplate: true,
             dropdownFilter: false,
             template: '<span>' +
-            '<span class="NameShort">{{NameShort}}</span>',
-
-
+            '<span class="city">{{city}}</span>',
             source: {
-                product:{
-                    data: $.getJSON('1.json').done( function (data) {      
-                                
-                                var result = data.product;
-                                return result;
-                            })
-                  }
-                }, 
+                data: {
+                    ajax: {
+                        url: "1.json",
+                        path: "data"
+                    }
+                }
+            },
 
+
+       
             callback: {
+                    onNavigateAfter: function (node, query, event) {
+                        var i = node;
+
+                    },
 
                     onClickAfter: function (node, a, item, event) {
                         event.preventDefault;
